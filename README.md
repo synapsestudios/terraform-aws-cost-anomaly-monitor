@@ -1,6 +1,33 @@
-# terraform-module-template
+# Terraform AWS Cost Anomaly Monitor
 
-A starter template for creating Terraform Modules
+A Terraform module to create an AWS Cost Anomaly Monitor.
+
+## Requirements
+
+To use this module, you need to ensure the SNS topic you pass contains this statement in it's policy:
+
+```hcl
+data "aws_iam_policy_document" "sns_topic_policy" {
+  policy_id = "sns_topic_policy"
+
+  statement {
+    sid = "AWSAnomalyDetectionSNSPublishingPermission"
+
+    actions = [
+      "SNS:Publish",
+    ]
+
+    principals {
+      type        = "Service"
+      identifiers = ["costalerts.amazonaws.com"]
+    }
+
+    resources = [
+      aws_sns_topic.example.arn,
+    ]
+  }
+}
+```
 
 ## Usage
 
@@ -22,74 +49,6 @@ module "example" {
     example = "Hello World"}
 ```
 
-_Hidden TF Docs Injection Comment below (**delete me I'm just an example**)_
-
-**DO NOT DELETE `<!-- BEGIN_TF_DOCS -->
-## Requirements
-
-No requirements.
-
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_example"></a> [example](#provider\_example) | n/a |
-
-## Modules
-
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [example_resource.example](https://registry.terraform.io/providers/hashicorp/example/latest/docs/resources/resource) | resource |
-
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_example"></a> [example](#input\_example) | Example variable | `string` | n/a | yes |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| <a name="output_example"></a> [example](#output\_example) | n/a |
-<!-- END_TF_DOCS -->`**
-
 <!-- BEGIN_TF_DOCS -->
-
-## Requirements
-
-No requirements.
-
-## Providers
-
-| Name                                                         | Version |
-| ------------------------------------------------------------ | ------- |
-| <a name="provider_example"></a> [example](#provider_example) | n/a     |
-
-## Modules
-
-No modules.
-
-## Resources
-
-| Name                                                                                                                 | Type     |
-| -------------------------------------------------------------------------------------------------------------------- | -------- |
-| [example_resource.example](https://registry.terraform.io/providers/hashicorp/example/latest/docs/resources/resource) | resource |
-
-## Inputs
-
-| Name                                                   | Description      | Type     | Default | Required |
-| ------------------------------------------------------ | ---------------- | -------- | ------- | :------: |
-| <a name="input_example"></a> [example](#input_example) | Example variable | `string` | n/a     |   yes    |
-
-## Outputs
-
-| Name                                                     | Description |
-| -------------------------------------------------------- | ----------- |
-| <a name="output_example"></a> [example](#output_example) | n/a         |
 
 <!-- END_TF_DOCS -->
