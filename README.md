@@ -49,6 +49,10 @@ module "example" {
     example = "Hello World"}
 ```
 
+## Resource Graph
+
+<img src="./graph.svg">
+
 <!-- BEGIN_TF_DOCS -->
 
 <!-- END_TF_DOCS -->
