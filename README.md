@@ -41,7 +41,7 @@ module "example" {
 
     tags = {
         "ProvisionedBy" = "terraform"
-        "Environment"   = "dev"
+        "Environment"   = "production"
         "Module"        = "terraform-aws-cost-explorer-anomaly-monitor"
     }
 }
