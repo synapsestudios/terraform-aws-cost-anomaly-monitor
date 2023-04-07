@@ -52,5 +52,39 @@ module "example" {
 <img src="./graph.svg">
 
 <!-- BEGIN_TF_DOCS -->
+## Requirements
 
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_ce_anomaly_monitor.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ce_anomaly_monitor) | resource |
+| [aws_ce_anomaly_subscription.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ce_anomaly_subscription) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment this module is being deployed to | `string` | `"dev"` | no |
+| <a name="input_sns_topic_arn"></a> [sns\_topic\_arn](#input\_sns\_topic\_arn) | The ARN of the SNS topic to send notifications to | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to all resources created, see internal documentation for tagging standards | `map(string)` | <pre>{<br>  "Environment": "dev",<br>  "Module": "terraform-aws-cost-explorer-anomaly-monitor",<br>  "ProvisionedBy": "terraform"<br>}</pre> | no |
+| <a name="input_threshold"></a> [threshold](#input\_threshold) | Value between 0 and 100 representing the percentage of impact to trigger an alert | `string` | `"10"` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_cost_anomaly_arn"></a> [cost\_anomaly\_arn](#output\_cost\_anomaly\_arn) | n/a |
 <!-- END_TF_DOCS -->
