@@ -33,20 +33,18 @@ data "aws_iam_policy_document" "sns_topic_policy" {
 
 ```hcl
 module "example" {
-    source = "github.com/synapsestudios/terraform-module-template"
+    source = "github.com/synapsestudios/terraform-aws-cost-anomaly-monitor"
 
-    example = "Hello World"
+    threshold = "10"
+    environment = "production"
+    sns_topic_arn = aws_sns_topic.example.arn
+
+    tags = {
+        "ProvisionedBy" = "terraform"
+        "Environment"   = "dev"
+        "Module"        = "terraform-aws-cost-explorer-anomaly-monitor"
+    }
 }
-```
-
-## Example Specific Usage
-
-```hcl
-module "example" {
-    source = "github.com/synapsestudios/terraform-module-template"
-
-    foo = "bar"
-    example = "Hello World"}
 ```
 
 ## Resource Graph
