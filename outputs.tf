@@ -1,3 +1,3 @@
-output "example" {
-  value = example_resource.example.example
+output "cost_anomaly_arn" {
+  value = aws_ce_anomaly_subscription.this.arn
 }
