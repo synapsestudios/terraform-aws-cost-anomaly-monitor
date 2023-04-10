@@ -5,8 +5,7 @@ resource "aws_ce_anomaly_monitor" "this" {
 }
 
 resource "aws_ce_anomaly_subscription" "this" {
-  monitor_arn = aws_ce_anomaly_monitor.this.arn
-  frequency   = "IMMEDIATE"
+  frequency = "IMMEDIATE"
 
   monitor_arn_list = [
     aws_ce_anomaly_monitor.this.arn,
