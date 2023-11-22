@@ -24,3 +24,25 @@ variable "environment" {
   default     = "dev"
   description = "The environment this module is being deployed to"
 }
+
+variable "account_list" {
+  type        = list(string)
+  default     = []
+  description = "List of AWS account numbers to monitor for cost anomalies. Required if using \"type\" argument"
+
+  validation {
+    condition     = length(var.account_list) <= 10
+    error_message = "The limit of linked accounts to monitor is 10. If you require more than this, add another instance of this module with the rest of the accounts"
+  }
+}
+
+variable "type" {
+  type        = string
+  default     = "service"
+  description = "The type of anomaly to detect for. Requires \"account_list\" argument. You won't be able to create a linked account monitor using this method from the linked account, the resource must be created in the parent account."
+
+  validation {
+    condition     = var.type == "account" || var.type == "service"
+    error_message = "The value of \"type\" must be \"account\" or \"service\""
+  }
+}
