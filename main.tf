@@ -1,14 +1,42 @@
-resource "aws_ce_anomaly_monitor" "this" {
+resource "aws_ce_anomaly_monitor" "service" {
+  count = var.type == "service" ? 1 : 0
+
   name              = "AWSServiceMonitor-${var.environment}"
   monitor_type      = "DIMENSIONAL"
   monitor_dimension = "SERVICE"
+}
+
+resource "aws_ce_anomaly_monitor" "account" {
+  count = var.type == "account" ? 1 : 0
+
+  lifecycle {
+    precondition {
+      condition     = length(var.account_list) > 0 && var.type == "account"
+      error_message = "var.account_list must be defined if using the \"type\" input variable."
+    }
+  }
+
+  name         = "AWSAccountCostMonitor-${var.environment}"
+  monitor_type = "CUSTOM"
+  monitor_specification = jsonencode({
+    And            = null
+    CostCategories = null
+    Dimensions     = null
+    Not            = null
+    Or             = null
+
+    Tags = {
+      Key    = "LINKED_ACCOUNT"
+      Values = var.account_list
+    }
+  })
 }
 
 resource "aws_ce_anomaly_subscription" "this" {
   frequency = "IMMEDIATE"
 
   monitor_arn_list = [
-    aws_ce_anomaly_monitor.this.arn,
+    var.type == "account" ? aws_ce_anomaly_monitor.account[0].arn : aws_ce_anomaly_monitor.service[0].arn
   ]
 
   name = "AWSServiceMonitorSubscription-${var.environment}"
@@ -28,5 +56,4 @@ resource "aws_ce_anomaly_subscription" "this" {
   }
 
   tags = var.tags
-
 }
