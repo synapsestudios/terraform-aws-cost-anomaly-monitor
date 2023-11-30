@@ -115,5 +115,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cost_anomaly_arn"></a> [cost\_anomaly\_arn](#output\_cost\_anomaly\_arn) | n/a |
+| <a name="output_cost_anomaly_subscription_arn"></a> [cost\_anomaly\_subscription\_arn](#output\_cost\_anomaly\_subscription\_arn) | n/a |
 <!-- END_TF_DOCS -->
