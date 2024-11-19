@@ -26,8 +26,9 @@ resource "aws_ce_anomaly_monitor" "account" {
     Or             = null
 
     Tags = {
-      Key    = "LINKED_ACCOUNT"
-      Values = var.account_list
+      Key          = "user:LINKED_ACCOUNT"
+      MatchOptions = null
+      Values       = var.account_list
     }
   })
 }
