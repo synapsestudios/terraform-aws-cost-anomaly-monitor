@@ -50,7 +50,7 @@ resource "aws_ce_anomaly_subscription" "this" {
   threshold_expression {
     dimension {
       key           = "ANOMALY_TOTAL_IMPACT_PERCENTAGE"
-      values        = ["${var.threshold}"]
+      values        = [var.threshold]
       match_options = ["GREATER_THAN_OR_EQUAL"]
 
     }
